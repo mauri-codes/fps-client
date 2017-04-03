@@ -1,0 +1,116 @@
+$heightlimit: '400px';
+$widthlimit: '800px';
+$contactColor: rgb(63, 90, 124);
+$footerColor: rgb(239, 240, 242);
+.welcomeblock{
+  margin: 0 0 0 0;
+  width: 100%;
+  position: relative;
+}
+.img1{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+.back{
+  background-color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 15px 15px 15px 15px;
+  border-radius: 25px;
+}
+.email{
+  width: 60%;
+  margin: 10px 20px 10px 0;
+  color: black;
+  font-family: "Liberation Mono";
+}
+.message1{
+  position: absolute;
+  height: 100%;
+  top: 25%;
+  left: 0;
+  color: white;
+  text-align: center;
+  .title{
+    font-family: Gargi;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .content{
+    font-family: "Abyssinica SIL";
+    font-weight: normal;
+    font-size: 15px;
+  }
+}
+@media (max-width: $widthlimit) {
+  .message1{
+    width: 100%;
+  }
+}
+@media (min-width: $widthlimit) {
+  .message1{
+    width: 50%;
+  }
+}
+@media (max-height: $heightlimit) {
+  .welcomeblock{
+    height: $heightlimit;
+  }
+}
+@media (min-height: $heightlimit) {
+  .welcomeblock{
+    height: 93vh;
+  }
+}
+.infoblock{
+  height: 350px;
+  text-align: center;
+  margin-top: 100px;
+}
+.info{
+  display: inline-block;
+  position: relative;
+  width: 75%;
+  text-align: left;
+  font-family: "webfont",Helvetica,Arial,sans-serif;
+  .title{
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    color: rgb(80,80,80) ;
+    font-weight: 500;
+  }
+  .content{
+    font-size: 20px;
+    color: rgb(80,80,80) ;
+  }
+  .img2{
+    height: 300px;
+  }
+}
+.contact{
+  text-align: center;
+  height: 225px;
+  width: 100%;
+  background-color: $contactColor;
+  color: whitesmoke;
+  .title{
+    padding-top: 78px;
+    margin-bottom: 10px;
+    font-size: 28px;
+  }
+  .content{
+    font-size: 20px;
+  }
+}
+.footer{
+  height: 100px;
+  width: 100%;
+  background-color: $footerColor;
+  text-align: right;
+  padding-top: 78px;
+}

@@ -1,0 +1,24 @@
+.page-header {
+  margin-top: 0;
+  width: 100%; }
+
+.well {
+  background-color: rgba(33, 137, 57, 0.08);
+  display: table; }
+
+.panel-group {
+  display: table-cell; }
+
+.row {
+  padding: 0;
+  margin: 30px 0 0 0; }
+
+.myimg {
+  display: inline-block;
+  margin: auto; }
+
+.outer {
+  text-align: center; }
+
+.devmessage {
+  font-weight: bold; }

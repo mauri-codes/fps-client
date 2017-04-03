@@ -1,0 +1,99 @@
+.welcomeblock {
+  margin: 0 0 0 0;
+  width: 100%;
+  position: relative; }
+
+.img1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2; }
+
+.back {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 15px 15px 15px 15px;
+  border-radius: 25px; }
+
+.email {
+  width: 60%;
+  margin: 10px 20px 10px 0;
+  color: black;
+  font-family: "Liberation Mono"; }
+
+.message1 {
+  position: absolute;
+  height: 100%;
+  top: 25%;
+  left: 0;
+  color: white;
+  text-align: center; }
+  .message1 .title {
+    font-family: Gargi;
+    font-weight: bold;
+    font-size: 25px; }
+  .message1 .content {
+    font-family: "Abyssinica SIL";
+    font-weight: normal;
+    font-size: 15px; }
+
+@media (max-width: 800px) {
+  .message1 {
+    width: 100%; } }
+
+@media (min-width: 800px) {
+  .message1 {
+    width: 50%; } }
+
+@media (max-height: 400px) {
+  .welcomeblock {
+    height: "400px"; } }
+
+@media (min-height: 400px) {
+  .welcomeblock {
+    height: 93vh; } }
+
+.infoblock {
+  height: 350px;
+  text-align: center;
+  margin-top: 100px; }
+
+.info {
+  display: inline-block;
+  position: relative;
+  width: 75%;
+  text-align: left;
+  font-family: "webfont",Helvetica,Arial,sans-serif; }
+  .info .title {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    color: #505050;
+    font-weight: 500; }
+  .info .content {
+    font-size: 20px;
+    color: #505050; }
+  .info .img2 {
+    height: 300px; }
+
+.contact {
+  text-align: center;
+  height: 225px;
+  width: 100%;
+  background-color: #3f5a7c;
+  color: whitesmoke; }
+  .contact .title {
+    padding-top: 78px;
+    margin-bottom: 10px;
+    font-size: 28px; }
+  .contact .content {
+    font-size: 20px; }
+
+.footer {
+  height: 100px;
+  width: 100%;
+  background-color: #eff0f2;
+  text-align: right;
+  padding-top: 78px; }
