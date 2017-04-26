@@ -33,7 +33,7 @@
           <div class="form-group">
             <label for="devname">Nombre del dipositivo</label>
             <input type="devname" class="form-control inp" id="devname" placeholder="Ejemplo: Scanner Digital 3000" [disabled]="disstate"
-                   required [(ngModel)] = "devname" name="devname" #f_devname="ngModel" pattern="[a-zA-Z0-9 ]*">
+                   required [(ngModel)] = "devname" name="devname" #f_devname="ngModel" pattern="[a-zA-Z0-9 _]*">
             <div [hidden]="f_devname.valid || f_devname.pristine"
                  class="alert alert-danger" *ngIf="!devname && !disstate">
               El nombre del dispositivo es requerido

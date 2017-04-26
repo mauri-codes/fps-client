@@ -14,8 +14,12 @@ import 'rxjs/add/operator/toPromise';
 export class AppService{
   constructor(private http: Http){}
 
-  uploadLink(email: String, devicename: String, action: String): Observable<>{
+  uploadLink(email: String, devicename: String, action: String){
     var data = {username: email, devicename: devicename, action: action};
     return this.http.post("http://localhost:5010/uploadlink", data).map((r:Response) => r.json());
+  }
+  regdone(devicename: String){
+    var data = {devicename: devicename};
+    return this.http.post("http://localhost:5010/reg_done", data).map((r:Response) => r.json());
   }
 }

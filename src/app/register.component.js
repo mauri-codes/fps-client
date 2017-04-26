@@ -19,12 +19,52 @@ var RegisterComponent = (function () {
         this.devname = "";
         this.name = "";
         this.disstate = false;
+        this.timeofmessage = 3000;
+        this.interval = 500;
     }
     RegisterComponent.prototype.newRegister = function () {
-        this.appService.uploadLink(this.email, this.devname, "register").
+        var _this = this;
+        this.appService.uploadLink(this.email, this.devname, "registerdev").
             subscribe(function (data) {
-            console.log("hi world");
+            _this.disstate = true;
+            if (data["done"] == "success") {
+                _this.message = "Esperando confirmacion del dispositivo, por favor ingrese " +
+                    "su huella digital en modo registro";
+            }
+            else {
+                _this.message = "An error ocurred, try it again.";
+            }
+            _this.checkStatus(16);
         });
+    };
+    RegisterComponent.prototype.checkStatus = function (n) {
+        var _this = this;
+        if (n != 0) {
+            console.log(n);
+            this.appService.regdone(this.devname).subscribe(function (data) {
+                if (data["success"]) {
+                    if (data["status"] != "waiting") {
+                        if (data["status"] == "register dev") {
+                        }
+                        else {
+                            _this.message = "El dispositivo que intenta registrar ya esta en uso." +
+                                " Contactese con el dueño del dispositivo";
+                            setTimeout(function () { _this.cancel(); }, _this.timeofmessage);
+                        }
+                    }
+                    else {
+                        setTimeout(function () { _this.checkStatus(n - 1); }, _this.interval);
+                    }
+                }
+                else {
+                    setTimeout(function () { _this.checkStatus(n - 1); }, _this.interval);
+                }
+            });
+        }
+        else {
+            this.message = "El tiempo de espera ha transcurrido, intentelo de nuveo";
+            setTimeout(function () { _this.cancel(); }, this.timeofmessage);
+        }
     };
     RegisterComponent.prototype.cancel = function () {
         this.disstate = false;
