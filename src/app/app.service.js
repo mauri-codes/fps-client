@@ -28,6 +28,10 @@ var AppService = (function () {
         var data = { devicename: devicename };
         return this.http.post("http://localhost:5010/reg_done", data).map(function (r) { return r.json(); });
     };
+    AppService.prototype.registerUser = function (name, email, devicename, fing) {
+        var data = { name: name, email: email, devicename: devicename, fingerprint: fing };
+        return this.http.post("http://localhost:5010/reg_user", data).map(function (r) { return r.json(); });
+    };
     AppService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

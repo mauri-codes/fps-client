@@ -16,6 +16,7 @@ var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var welcome_component_1 = require('./welcome.component');
 var register_component_1 = require("./register.component");
+var reguser_component_1 = require('./reguser.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,7 +28,8 @@ var AppModule = (function () {
                 forms_1.FormsModule],
             declarations: [app_component_1.AppComponent,
                 welcome_component_1.WelcomeComponent,
-                register_component_1.RegisterComponent],
+                register_component_1.RegisterComponent,
+                reguser_component_1.ReguserComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

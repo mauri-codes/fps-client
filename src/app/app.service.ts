@@ -22,4 +22,8 @@ export class AppService{
     var data = {devicename: devicename};
     return this.http.post("http://localhost:5010/reg_done", data).map((r:Response) => r.json());
   }
+  registerUser(name: String, email: String, devicename: String, fing: String){
+    var data = {name: name, email: email, devicename: devicename, fingerprint: fing};
+    return this.http.post("http://localhost:5010/reg_user", data).map((r:Response) => r.json());
+  }
 }

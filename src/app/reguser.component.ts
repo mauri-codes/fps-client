@@ -4,13 +4,13 @@ import { Router }         from '@angular/router';
 
 @Component({
   moduleId: module.id,
-  selector: 'register',
+  selector: 'reguser',
   providers: [ AppService ],
-  templateUrl: './html/register.component.html',
+  templateUrl: './html/reguser.component.html',
   styleUrls: ['scss/register.component.css']
 })
 
-export class RegisterComponent {
+export class ReguserComponent {
   private devname:string;
   private name:string;
   private email:string;
@@ -26,19 +26,19 @@ export class RegisterComponent {
     this.timeofmessage = 3000;
     this.interval = 500;
   }
-  newRegister(){
+  newUser(){
 
-    this.appService.uploadLink(this.email, this.devname, "registerdev").
-      subscribe(data => {
-        this.disstate = true;
-        if(data["done"] == "success"){
-          this.message = "Esperando confirmacion del dispositivo, por favor ingrese " +
-            "su huella digital en modo registro";
-        }else{
-          this.message = "An error ocurred, try it again.";
-        }
-        this.checkStatus(16);
-      });
+    this.appService.uploadLink(this.email, this.devname, "register").
+    subscribe(data => {
+      this.disstate = true;
+      if(data["done"] == "success"){
+        this.message = "Esperando confirmacion del dispositivo, por favor ingrese " +
+          "su huella digital en modo registro";
+      }else{
+        this.message = "Ocurrio un error, intentelo de nuevo";
+      }
+      this.checkStatus(16);
+    });
   }
   checkStatus(n: number) {
     if (n != 0){
@@ -46,12 +46,12 @@ export class RegisterComponent {
       this.appService.regdone(this.devname).subscribe(data => {
         if (data["success"]) {
           if (data["status"] != "waiting") {
-            if(data["status"] == "register dev"){
-              //register dev :)
+            if(data["status"] == "register user"){
+              this.registerUser(data["fing"]);
             }
             else{
               this.message = "El dispositivo que intenta registrar ya esta en uso." +
-                              " Contactese con el dueño del dispositivo";
+                " Contactese con el dueño del dispositivo";
               setTimeout(()=>{this.cancel()}, this.timeofmessage);
             }
           }
@@ -70,6 +70,17 @@ export class RegisterComponent {
   }
   cancel(){
     this.disstate = false;
-
+  }
+  registerUser(fingerprint: String){
+    this.appService.registerUser(this.name, this.email, this.devname, fingerprint).
+    subscribe(data => {
+      this.disstate = true;
+      if(data["done"] == "success"){
+        this.message = "Usuario registrado correctamente.";
+      }else{
+        this.message = "Ocurrio un error, Intentelo de nuevo";
+      }
+      setTimeout(()=>{this.cancel()}, this.timeofmessage);
+    });
   }
 }
