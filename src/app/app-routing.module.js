@@ -13,10 +13,12 @@ var router_1 = require('@angular/router');
 var welcome_component_1 = require("./welcome.component");
 var register_component_1 = require("./register.component");
 var reguser_component_1 = require('./reguser.component');
+var login_component_1 = require("./login.component");
 var appRoutes = [
     { path: '', component: welcome_component_1.WelcomeComponent },
     { path: 'register', component: register_component_1.RegisterComponent },
     { path: 'reguser', component: reguser_component_1.ReguserComponent },
+    { path: 'login', component: login_component_1.LoginComponent },
     // { path: 'users',      component: UsersComponent },
     //{ path: '',           redirectTo: 'welcome', pathMatch: 'full'},
     { path: '**', component: welcome_component_1.WelcomeComponent },

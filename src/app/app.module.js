@@ -17,6 +17,7 @@ var app_component_1 = require('./app.component');
 var welcome_component_1 = require('./welcome.component');
 var register_component_1 = require("./register.component");
 var reguser_component_1 = require('./reguser.component');
+var login_component_1 = require('./login.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +30,8 @@ var AppModule = (function () {
             declarations: [app_component_1.AppComponent,
                 welcome_component_1.WelcomeComponent,
                 register_component_1.RegisterComponent,
-                reguser_component_1.ReguserComponent],
+                reguser_component_1.ReguserComponent,
+                login_component_1.LoginComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
