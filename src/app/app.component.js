@@ -9,18 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var login_details_service_1 = require('./login-details.service');
 var AppComponent = (function () {
-    function AppComponent() {
-        this.name = 'Angular';
+    function AppComponent(loginService) {
+        var _this = this;
+        this.loginService = loginService;
+        this.username = "";
+        this.role = "";
+        loginService.loginEmitted$.subscribe(function (user) { _this.username = user.username; });
+        this.username = (localStorage.getItem('currentUser') + "" == "null") ? '' : localStorage.getItem('currentUser');
     }
+    AppComponent.prototype.logout = function () {
+        localStorage.setItem('currentUser', '');
+        localStorage.setItem('token', '');
+        this.username = '';
+    };
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-app',
             templateUrl: 'html/app.component.html',
+            providers: [login_details_service_1.LoginDetailsService],
             styleUrls: ['./scss/app.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [login_details_service_1.LoginDetailsService])
     ], AppComponent);
     return AppComponent;
 }());

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
 import { Router }         from '@angular/router';
+import { LoginDetailsService } from './login-details.service';
 
 @Component({
   moduleId: module.id,
   selector: 'login',
-  providers: [ AppService ],
+  providers: [ AppService, LoginDetailsService ],
   templateUrl: './html/login.component.html',
   styleUrls: ['scss/register.component.css']
 })
@@ -16,7 +17,9 @@ export class LoginComponent {
   private message: string;
   private timeofmessage: number;
   private interval: number;
-  constructor(private appService: AppService, private router: Router){
+  constructor(private appService: AppService,
+              private loginService: LoginDetailsService,
+              private router: Router){
     this.email = "";
     this.disstate = false;
     this.timeofmessage = 3000;
@@ -46,7 +49,7 @@ export class LoginComponent {
               this.checkUser(data["fing"]);
             }
             else{
-              this.message = "Error, es posible que el dispositivo este en modo registro" +
+              this.message = "Error, es posible que el dispositivo este en modo registro " +
                 "cuando debiera estar en modo identificacion";
               setTimeout(()=>{this.cancel()}, this.timeofmessage);
             }
@@ -73,9 +76,21 @@ export class LoginComponent {
     subscribe(data => {
       this.disstate = true;
       if(data["success"]){
+        this.appService.login(this.email, fingerprint).subscribe(data=>{
+          if(data['success']){
+            localStorage.setItem('token', data['token']);
+            localStorage.setItem('currentUser', this.email);
+            localStorage.setItem('role', data['role']);
+            this.loginService.emitChange({username: this.email});
+            this.router.navigate(['/']);
+            location.reload();
+          }else{
+            console.log(data['message']);
+          }
+        });
         this.message = "Login exitoso.";
       }else{
-        this.message = "Ocurrio un error, Intentelo de nuevo";
+        this.message = "Ocurrio un error, Huella digital incorrecta";
       }
       setTimeout(()=>{this.cancel()}, this.timeofmessage);
     });

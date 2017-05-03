@@ -30,5 +30,8 @@ export class AppService{
     var data = {name: name, email: email, fingerprint: fing};
     return this.http.post("http://localhost:5010/check_user", data).map((r:Response) => r.json());
   }
-
+  login(name: String, password: String){
+    var data = {name: name, password: password};
+    return this.http.post("http://localhost:5010/login", data).map((r:Response) => r.json());
+  }
 }

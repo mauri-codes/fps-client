@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var app_service_1 = require('./app.service');
 var router_1 = require('@angular/router');
+var login_details_service_1 = require('./login-details.service');
 var LoginComponent = (function () {
-    function LoginComponent(appService, router) {
+    function LoginComponent(appService, loginService, router) {
         this.appService = appService;
+        this.loginService = loginService;
         this.router = router;
         this.email = "";
         this.disstate = false;
@@ -46,7 +48,7 @@ var LoginComponent = (function () {
                             _this.checkUser(data["fing"]);
                         }
                         else {
-                            _this.message = "Error, es posible que el dispositivo este en modo registro" +
+                            _this.message = "Error, es posible que el dispositivo este en modo registro " +
                                 "cuando debiera estar en modo identificacion";
                             setTimeout(function () { _this.cancel(); }, _this.timeofmessage);
                         }
@@ -74,10 +76,23 @@ var LoginComponent = (function () {
             subscribe(function (data) {
             _this.disstate = true;
             if (data["success"]) {
+                _this.appService.login(_this.email, fingerprint).subscribe(function (data) {
+                    if (data['success']) {
+                        localStorage.setItem('token', data['token']);
+                        localStorage.setItem('currentUser', _this.email);
+                        localStorage.setItem('role', data['role']);
+                        _this.loginService.emitChange({ username: _this.email });
+                        _this.router.navigate(['/']);
+                        location.reload();
+                    }
+                    else {
+                        console.log(data['message']);
+                    }
+                });
                 _this.message = "Login exitoso.";
             }
             else {
-                _this.message = "Ocurrio un error, Intentelo de nuevo";
+                _this.message = "Ocurrio un error, Huella digital incorrecta";
             }
             setTimeout(function () { _this.cancel(); }, _this.timeofmessage);
         });
@@ -86,11 +101,11 @@ var LoginComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'login',
-            providers: [app_service_1.AppService],
+            providers: [app_service_1.AppService, login_details_service_1.LoginDetailsService],
             templateUrl: './html/login.component.html',
             styleUrls: ['scss/register.component.css']
         }), 
-        __metadata('design:paramtypes', [app_service_1.AppService, router_1.Router])
+        __metadata('design:paramtypes', [app_service_1.AppService, login_details_service_1.LoginDetailsService, router_1.Router])
     ], LoginComponent);
     return LoginComponent;
 }());

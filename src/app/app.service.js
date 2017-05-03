@@ -36,6 +36,10 @@ var AppService = (function () {
         var data = { name: name, email: email, fingerprint: fing };
         return this.http.post("http://localhost:5010/check_user", data).map(function (r) { return r.json(); });
     };
+    AppService.prototype.login = function (name, password) {
+        var data = { name: name, password: password };
+        return this.http.post("http://localhost:5010/login", data).map(function (r) { return r.json(); });
+    };
     AppService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
